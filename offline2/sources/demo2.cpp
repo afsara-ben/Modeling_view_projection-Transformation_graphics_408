@@ -1,44 +1,30 @@
 /*
-//
-// Created by afsara on 7/11/19.
-//
 
-#include <iostream>
+#include <bits/stdc++.h>
 
-float (*identityMatrix(float identity[][2], int identity_sz))[2]{
+const double PI = atan(1) * 4;
+using namespace std;
 
-    std::cout << "Here\n";
 
-    for(int i = 0 ; i < identity_sz ; i++){
-        for(int j = 0 ; j < identity_sz ; j++){
-            std::cout << identity[i][j] << " ";
+void printMatrix(float (*matrix)[2]) {
+    cout << "\n in print matrix \n";
+
+    for (int i = 0; i < 2; ++i) {
+
+        for (int j = 0; j < 2; ++j) {
+            cout << matrix[i][j] << " ";
         }
-        std::cout << "\n";
+        cout << endl;
     }
-
-    return identity;
 }
 
-int main(int argc, char const *argv[])
-{
-    */
-/*float f[][2] = {
-            {1,2},
-            {3,4}
-    };*//*
 
+int main() {
 
-    float f[2][2];
-    float (*ff)[2] = identityMatrix(f,2);
+    float m1[2][2] = {{1, 2},
+                      {3, 4}};
 
-   */
-/* for(int i = 0 ; i < sizeof(ff)/sizeof(ff[0][0]) ; i++){
-        for(int j = 0 ; j < 2 ; j++){
-            std::cout << ff[i][j] << " ";
-        }
-        std::cout << "\n";
-    }
-*//*
+    printMatrix(m1);
 
     return 0;
 }

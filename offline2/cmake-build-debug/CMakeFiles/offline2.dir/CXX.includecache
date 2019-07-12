@@ -19,4 +19,14 @@ stack
 -
 vector
 -
+stdlib.h
+-
+cstring
+-
+cmath
+-
+bits/stdc++.h
+-
+iomanip
+-
 
