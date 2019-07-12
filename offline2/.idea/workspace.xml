@@ -34,40 +34,52 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/demo.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="863" selection-start-line="863" selection-end-line="863" />
+            <state relative-caret-position="41">
+              <caret line="230" selection-start-line="230" selection-end-line="243" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sources/demo2.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="1017" lean-forward="true" selection-start-line="1017" selection-end-line="1017" />
               <folding>
                 <element signature="e#40#64#0" expanded="true" />
+                <element signature="e#16722#20550#0" />
+                <element signature="e#20553#24076#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/demo2.cpp">
+        <entry file="file://$PROJECT_DIR$/cmake-build-debug/stage3.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="756" column="5" lean-forward="true" selection-end-line="863" />
-              <folding>
-                <element signature="e#40#64#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="15">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cmake-build-debug/stage1.txt">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cmake-build-debug/stage2.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+            <state>
+              <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -75,8 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cmake-build-debug/scene.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="12" lean-forward="true" selection-start-column="12" selection-end-column="12" />
+            <state relative-caret-position="265">
+              <caret line="32" column="3" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -94,11 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>identityMatrix</find>
-      <find>cout</find>
-      <find>getTopOfStack</find>
-      <find>showstack</find>
-      <find>insertToStack</find>
       <find>here</find>
       <find>os</find>
       <find>cos</find>
@@ -109,11 +116,9 @@
       <find>readfromfile</find>
       <find>outfile</find>
       <find>readfrom</find>
-      <find>matrixMultiplication</find>
       <find>makeIdentityMatrix</find>
       <find>eye</find>
       <find>makeIdentityMatrix2</find>
-      <find>read</find>
       <find>printMatrix</find>
       <find>temp</find>
       <find>normalize</find>
@@ -124,6 +129,13 @@
       <find>end</find>
       <find>main</find>
       <find>printMatrix2</find>
+      <find>fovX</find>
+      <find>Tan</find>
+      <find>infile.close</find>
+      <find>read</find>
+      <find>printmatrix3</find>
+      <find>matrixMultiplication</find>
+      <find>cross</find>
     </findStrings>
     <replaceStrings>
       <replace>resultantMatrix</replace>
@@ -136,11 +148,12 @@
       <list>
         <option value="$PROJECT_DIR$/main.cpp" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.cpp" />
-        <option value="$PROJECT_DIR$/cmake-build-debug/scene.txt" />
         <option value="$PROJECT_DIR$/sources/main.cpp" />
         <option value="$PROJECT_DIR$/cmake-build-debug/stage1.txt" />
-        <option value="$PROJECT_DIR$/sources/demo2.cpp" />
         <option value="$PROJECT_DIR$/sources/demo.cpp" />
+        <option value="$PROJECT_DIR$/cmake-build-debug/stage3.txt" />
+        <option value="$PROJECT_DIR$/cmake-build-debug/scene.txt" />
+        <option value="$PROJECT_DIR$/sources/demo2.cpp" />
       </list>
     </option>
   </component>
@@ -232,12 +245,12 @@
       <workItem from="1562774314136" duration="559000" />
       <workItem from="1562774948858" duration="21575000" />
       <workItem from="1562861582073" duration="21309000" />
-      <workItem from="1562928714235" duration="9883000" />
+      <workItem from="1562928714235" duration="17658000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53326000" />
+    <option name="totallyTimeSpent" value="61101000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
@@ -248,13 +261,13 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.19480519" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20779221" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.5649351" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.7467533" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32954547" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
@@ -286,39 +299,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/scene.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="12" lean-forward="true" selection-start-column="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/stage1.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/stage2.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+        <state>
+          <caret column="3" lean-forward="true" selection-start-column="3" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/demo2.cpp">
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/stage3.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="756" column="5" lean-forward="true" selection-end-line="863" />
-          <folding>
-            <element signature="e#40#64#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="15">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/demo.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="863" selection-start-line="863" selection-end-line="863" />
+        <state relative-caret-position="41">
+          <caret line="230" selection-start-line="230" selection-end-line="243" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/stage1.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/scene.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="32" column="3" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/demo2.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="1017" lean-forward="true" selection-start-line="1017" selection-end-line="1017" />
           <folding>
             <element signature="e#40#64#0" expanded="true" />
+            <element signature="e#16722#20550#0" />
+            <element signature="e#20553#24076#0" />
           </folding>
         </state>
       </provider>

@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/afsara/CLionProjects/offline2/sources/demo.cpp
-bits/stdc++.h
--
-iomanip
--
-
 /home/afsara/CLionProjects/offline2/sources/demo2.cpp
 bits/stdc++.h
 -

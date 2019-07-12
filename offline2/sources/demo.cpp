@@ -1,17 +1,17 @@
+/*
 //
 // Created by afsara on 7/11/19.
 //
 
 #include <bits/stdc++.h>
-
-#include <iomanip>
+#include <fcntl.h>
 
 using namespace std;
 const double PI = acos(-1.0);
 const double EPS = 1e-4;
 
-ifstream infile, infile2;
-ofstream outfile, outfile2;
+ifstream infile, infile2, infile3;
+ofstream outfile, outfile2, outfile3;
 int sz = 4;
 
 stack<float (*)[10]> s;
@@ -92,6 +92,12 @@ float Cos(float angle) {
 
 float Sin(float angle) {
     float var = sin(degToRad(angle));
+    if (isNearlyEqual(var, 0)) var = 0;
+    return var;
+}
+
+float Tan(float angle) {
+    float var = tan(degToRad(angle));
     if (isNearlyEqual(var, 0)) var = 0;
     return var;
 }
@@ -222,10 +228,24 @@ void printMatrix2(float (*matrix)[10]) {
     cout << " out of printmatrix2" << endl;
 }
 
+void printMatrix3(float (*matrix)[10]) {
+
+    for (int i = 0; i < sz - 1; ++i) {
+        for (int j = 0; j < sz - 1; ++j) {
+            cout << matrix[i][j] << " ";
+            outfile3 << matrix[j][i] << " ";
+        }
+        cout << endl;
+        outfile3 << endl;
+    }
+    outfile3 << "-" << endl;
+    cout << " out of printmatrix3" << endl;
+}
+
 void print(float (*matrix)[10]) {
 
-    for (int i = 0; i < sz ; ++i) {
-        for (int j = 0; j < sz ; ++j) {
+    for (int i = 0; i < sz; ++i) {
+        for (int j = 0; j < sz; ++j) {
             cout << matrix[i][j] << " ";
         }
         cout << endl;
@@ -708,15 +728,149 @@ void readFromStage1File() {
 
         cout << "\t\tABOUT TO MULTIPLY THE FOLLOWING\n\n";
         print(V);
-        cout<<endl;
+        cout << endl;
         print(myMatrix);
-        cout<<"\n\n";
+        cout << "\n\n";
 
         float (*resultant)[10];
 
         resultant = matrixMultiplication(V, myMatrix, sz, sz, sz, sz);
 
         printMatrix2(resultant); //T*I
+
+
+    }
+}
+
+void readFromStage2File() {
+    // open a file in read mode.
+    cout << "Reading from the stage2.txt file" << endl;
+
+    string line;
+
+    infile3.open("stage2.txt");
+    cout << "here2\n";
+    if (!infile3.is_open()) {
+        perror("Error open");
+        exit(EXIT_FAILURE);
+    }
+
+    int line_num = 0;
+    vector<string> tokens[200]; // Create vector to hold the words
+
+    while (getline(infile3, line)) {
+
+
+        string buf;                 // Have a buffer string
+        stringstream ss(line);       // Insert the string into a stream
+
+        while (ss >> buf)
+            tokens[line_num].push_back(buf);
+
+        line_num++;
+
+    }
+
+
+
+    //printing the file content as a 2d array
+    for (int j = 0; j < line_num; ++j) {
+
+        for (int i = 0; i < tokens[j].size(); ++i) {
+
+            //cout << j << " : " << i << " " << tokens[j][i] << " \n";
+
+        }
+        // cout << endl;
+    }
+
+    float fovX = fovY * aspectRatio; //fovX = fovY * aspectRatio
+    float t = near * Tan(fovY / 2); //t = near * tan(fovY/2)
+    float div_r = near * Tan(fovX / 2); //r = near * tan(fovX/2)
+
+
+
+
+    float (*P)[10] = new float[10][10];
+    vector<float> temp = {near / div_r, 0, 0, 0, 0, near / t, 0, 0, 0, 0, (-(far + near) / (far - near)),
+                          (-(2 * far * near) / (far - near)), 0, 0, -1, 0};
+
+    for (int j = 0; j < sz; ++j) {
+
+        for (int k = 0; k < sz; ++k) {
+            P[j][k] = temp.at(j * 4 + k);
+        }
+    }
+
+    print(P);
+
+    //P*matrix
+    int itr = 0;
+    for (int i = 0; i < line_num; i++) {
+
+        if (tokens[i][itr] == "-") { i++; }
+        if (tokens[i][itr] == "end") break;
+        //input three points
+        struct Point firstPoint, secondPoint, thirdPoint;
+
+
+        firstPoint.x = stof(tokens[i][itr].c_str());
+        firstPoint.y = stof(tokens[i][itr + 1].c_str());
+        firstPoint.z = stof(tokens[i][itr + 2].c_str());
+
+
+        i++;
+        secondPoint.x = stof(tokens[i][itr].c_str());
+        secondPoint.y = stof(tokens[i][itr + 1].c_str());
+        secondPoint.z = stof(tokens[i][itr + 2].c_str());
+
+        i++;
+        thirdPoint.x = stof(tokens[i][itr].c_str());
+        thirdPoint.y = stof(tokens[i][itr + 1].c_str());
+        thirdPoint.z = stof(tokens[i][itr + 2].c_str());
+
+        float myMatrix[10][10];
+
+        vector<float> temp;
+        temp.push_back(firstPoint.x);
+        temp.push_back(secondPoint.x);
+        temp.push_back(thirdPoint.x);
+        temp.push_back(1);
+
+        temp.push_back(firstPoint.y);
+        temp.push_back(secondPoint.y);
+        temp.push_back(thirdPoint.y);
+        temp.push_back(1);
+
+        temp.push_back(firstPoint.z);
+        temp.push_back(secondPoint.z);
+        temp.push_back(thirdPoint.z);
+        temp.push_back(1);
+
+        temp.push_back(1);
+        temp.push_back(1);
+        temp.push_back(1);
+        temp.push_back(1);
+
+
+        for (int j = 0; j < sz; ++j) {
+
+            for (int k = 0; k < sz; ++k) {
+                myMatrix[j][k] = temp.at(j * 4 + k);
+            }
+        }
+
+        cout << "\t\tABOUT TO MULTIPLY THE FOLLOWING\n\n";
+        print(P);
+        cout << endl;
+        print(myMatrix);
+        cout << "\n\n";
+
+        float (*resultant)[10];
+
+        resultant = matrixMultiplication(P, myMatrix, sz, sz, sz, sz);
+
+        printMatrix3(resultant); //T*I
 
 
     }
@@ -737,6 +891,18 @@ int main() {
     readFromStage1File();
     outfile2 << "end" << endl;
     outfile2.close();
+
+    outfile2.open("stage2.txt");
+    readFromStage1File();
+    outfile2 << "end" << endl;
+    outfile2.close();
+
+  */
+/*  outfile3.open("stage2.txt");
+    readFromStage2File();
+    outfile3 << "end" << endl;
+    outfile3.close();*//*
+
 
     return 0;
 }
@@ -861,3 +1027,4 @@ float (*makeTranslationMatrix(float transX, float transY, float transZ))[10] {
     }
     return myMatrix;
 }
+*/
