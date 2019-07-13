@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/offline2_v2_0.dir/main.cpp.o  -o offline2_v2_0 

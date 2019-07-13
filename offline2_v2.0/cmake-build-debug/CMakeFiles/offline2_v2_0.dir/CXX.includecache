@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/afsara/CLionProjects/offline2_v2.0/main.cpp
+iostream
+-
+stack
+-
+vector
+-
+cstdio
+-
+fstream
+-
+cmath
+-
+cstring
+-
+string
+-
+sstream
+-
+iomanip
+-
+

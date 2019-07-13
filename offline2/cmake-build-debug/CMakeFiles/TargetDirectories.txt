@@ -1,3 +1,0 @@
-/home/afsara/CLionProjects/offline2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/afsara/CLionProjects/offline2/cmake-build-debug/CMakeFiles/offline2.dir
-/home/afsara/CLionProjects/offline2/cmake-build-debug/CMakeFiles/edit_cache.dir
