@@ -28,17 +28,7 @@ stack<int> Size;
 struct Point {
     float x, y, z, w = 1;
 
-    Point() {
-    }
-
-    Point(float px, float py, float pz) {
-
-        x = px;
-        y = py;
-        z = pz;
-        w = 1;
-    }
-
+    Point() {}
 };
 
 struct Vector {
@@ -63,32 +53,92 @@ struct Vector {
 Vector eye(0, 0, 0), look(0, 0, 0), up(0, 0, 0);
 float fovY, aspectRatio, near, far;
 
-//functions
-
+/*  functions   */
 
 float (*matrixMultiplication(float firstMatrix[][10], float secondMatrix[][10],
                              int rowFirst,
                              int columnFirst, int rowSecond, int columnSecond))[10];
 
 
-float (*makeIdentityMatrix(float identity[][10], int identity_sz))[10];
+float (*makeIdentityMatrix(int identity_sz))[10];
 
 void showstack(stack<float (*)[10]> s);
 
 void insertToStack(float arr[][10]);
 
-float (*getTopOfStack())[10];
-
 float (*makeTranslationMatrix(float transX, float transY, float transZ))[10];
 
 float (*makeScalingMatrix(float scaleX, float scaleY, float scaleZ))[10];
+
+inline double degToRad(double ang);
+
+static inline bool isNearlyEqual(const double &a, const double &b);
+
+float Cos(float angle);
+
+float Sin(float angle);
+
+float Tan(float angle);
+
+Vector crossProduct(const Vector &vec1, const Vector &vec2);
+
+float dotProduct(const Vector &vec1, const Vector &vec2);
+
+Vector normalize(Vector a);
+
+Vector multiply(Vector v, float scalar);
+
+Vector add(Vector v1, Vector v2);
+
+Vector subtract(Vector v1, Vector v2);
+
+Vector rotateRod(Vector x, Vector rotateAxis, float rotateAngle);
+
+void printMatrix(float (*matrix)[10]);
+
+void printMatrix2(float (*matrix)[10]);
+
+void printMatrix3(float (*matrix)[10]);
+
+void print(float (*matrix)[10]);
+
+void printTokens(vector<string> tokens[100], int line_num);
+
+void readFromFile();
+
+void readFromStage1File();
+
+void readFromStage2File();
+
+
+int main() {
+
+
+    float (*identityMatrix)[10] = makeIdentityMatrix(sz);
+    insertToStack(identityMatrix);
+
+    outfile.open("stage1.txt");
+    readFromFile();
+    outfile.close();
+
+    outfile2.open("stage2.txt");
+    readFromStage1File();
+    outfile2.close();
+
+    outfile3.open("stage3.txt");
+    readFromStage2File();
+    outfile3.close();
+
+    return 0;
+}
+
 
 inline double degToRad(double ang) {
     return ang * PI / 180.0;
 }
 
 static inline bool isNearlyEqual(const double &a, const double &b) {
-    return std::abs(a - b) < EPS;
+    return abs(a - b) < EPS;
 }
 
 float Cos(float angle) {
@@ -124,17 +174,15 @@ Vector crossProduct(const Vector &vec1, const Vector &vec2) {
 float dotProduct(const Vector &vec1, const Vector &vec2) {
 
     float res;
-    //cout << "\n vec1 : " << vec1.x << " " << vec1.y << " " << vec1.z << endl;
-    //cout << "\n vec2 : " << vec2.x << " " << vec2.y << " " << vec2.z << endl;
-    res += vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z;
 
+    res = vec1.x * vec2.x + vec1.y * vec2.y + vec1.z * vec2.z;
     if (isNearlyEqual(res, 0)) res = 0;
 
-    //cout << "\n res : " << res << endl;
     return res;
 }
 
 Vector normalize(Vector a) {
+
     float val = sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
 
     Vector p;
@@ -160,7 +208,6 @@ Vector add(Vector v1, Vector v2) {
     ret.y = v1.y + v2.y;
     ret.z = v1.z + v2.z;
     return ret;
-
 }
 
 
@@ -177,12 +224,12 @@ Vector rotateRod(Vector x, Vector rotateAxis, float rotateAngle) {
 
 
     Vector temp1 = multiply(x, Cos(rotateAngle)); //cos(theta)*x ; x is a vector
-    cout << "\ntemp1 " << temp1.x << " " << temp1.y << " " << temp1.z << endl;
+    //cout << "\ntemp1 " << temp1.x << " " << temp1.y << " " << temp1.z << endl;
 
     Vector temp2 = crossProduct(rotateAxis, x); // a cross x
-    cout << "a cross x : " << rotateAxis.x << " " << rotateAxis.y << " " << rotateAxis.z << " cross " << x.x << " "
-         << x.y << " " << x.z << endl;
-    cout << "\ntemp2 " << temp2.x << " " << temp2.y << " " << temp2.z << endl;
+    // cout << "a cross x : " << rotateAxis.x << " " << rotateAxis.y << " " << rotateAxis.z << " cross " << x.x << " "
+    // << x.y << " " << x.z << endl;
+    //cout << "\ntemp2 " << temp2.x << " " << temp2.y << " " << temp2.z << endl;
 
     Vector temp3 = multiply(temp2, Sin(rotateAngle)); //sin(theta) * (a cross x)
     //cout << "\ntemp3 " << temp3.x << " " << temp3.y << " " << temp3.z << endl;
@@ -219,11 +266,11 @@ void printMatrix(float (*matrix)[10]) {
         cout << endl;
         outfile << endl;
     }
-    outfile << "-" << endl;
+    outfile << endl;
 }
 
 void printMatrix2(float (*matrix)[10]) {
-    cout << "\n in print matrix \n";
+    cout << "\n in print matrix 2\n";
 
     for (int i = 0; i < sz - 1; ++i) {
         for (int j = 0; j < sz - 1; ++j) {
@@ -233,12 +280,13 @@ void printMatrix2(float (*matrix)[10]) {
         cout << endl;
         outfile2 << endl;
     }
-    outfile2 << "-" << endl;
-    cout << " out of printmatrix2" << endl;
+    outfile2 << endl;
+
 }
 
 void printMatrix3(float (*matrix)[10]) {
 
+    cout << "\n in print matrix 3\n";
     for (int i = 0; i < sz - 1; ++i) {
         for (int j = 0; j < sz - 1; ++j) {
             cout << matrix[i][j] << " ";
@@ -247,8 +295,8 @@ void printMatrix3(float (*matrix)[10]) {
         cout << endl;
         outfile3 << endl;
     }
-    outfile3 << "-" << endl;
-    cout << " out of printmatrix3" << endl;
+    cout<<endl;
+    outfile3 << endl;
 }
 
 void print(float (*matrix)[10]) {
@@ -260,32 +308,9 @@ void print(float (*matrix)[10]) {
         }
         cout << endl;
     }
+    cout<<endl;
 }
 
-
-float (*makeIdentityMatrix2(int identity_sz))[10] {
-
-    int row, col;
-
-    float(*identity)[10] = new float[10][10];
-    for (row = 0; row < identity_sz; row++) {
-        for (col = 0; col < identity_sz; col++) {
-
-            // Checking if row is equal to column
-            if (row == col) {
-                identity[row][col] = 1;
-
-            } else {
-                identity[row][col] = 0;
-
-            }
-
-        }
-
-    }
-    return identity;
-
-}
 
 float (*balance_W(float (*m)[10]))[10] {
 
@@ -305,9 +330,22 @@ float (*balance_W(float (*m)[10]))[10] {
 
 }
 
+void printTokens(vector<string> tokens[100], int line_num) {
+    //printing the file content as a 2d array
+    for (int j = 0; j < line_num; ++j) {
+
+        for (int i = 0; i < int(tokens[j].size()); ++i) {
+
+            cout << j << " : " << i << " " << tokens[j][i] << " \n";
+
+        }
+        cout << endl;
+    }
+}
+
 void readFromFile() {
-// open a file in read mode.
-    cout << "Reading from the file" << endl;
+    // open a file in read mode.
+    cout << "\n\n~~~~~~~~~~~~~~~~~~~~~~~~ Reading from the scene.txt file  ~~~~~~~~~~~~~~~~~~~~~~~\n\n";
 
     string line;
 
@@ -319,14 +357,11 @@ void readFromFile() {
     }
 
     int line_num = 0;
-    vector<string> tokens[100]; // Create vector to hold the words
+    vector<string> tokens[100];     // Create vector to hold the words
     while (getline(infile, line)) {
 
-
-        string buf;                 // Have a buffer string
+        string buf;                     // Have a buffer string
         stringstream ss(line);       // Insert the string into a stream
-
-
 
         while (ss >> buf)
             tokens[line_num].push_back(buf);
@@ -334,17 +369,7 @@ void readFromFile() {
         line_num++;
     }
 
-
-    //printing the file content as a 2d array
-    for (int j = 0; j < line_num; ++j) {
-
-        for (int i = 0; i < tokens[j].size(); ++i) {
-
-            //cout << j << " : " << i << " " << tokens[j][i] << " \n";
-
-        }
-        //cout << endl;
-    }
+    //printTokens(tokens, line_num);
 
     string command;
     for (int i = 0; i < line_num; ++i) {
@@ -368,28 +393,24 @@ void readFromFile() {
             far = stof(tokens[i][3].c_str());
         } else {
 
-            for (int itr = 0; itr < tokens[i].size(); ++itr) {
+            for (int itr = 0; itr < int(tokens[i].size()); ++itr) {
 
                 command = tokens[i][itr];
 
-
-                //start parsing commandscrossProduct(rotateAxis, iHat)
+                //start parsing commands
                 if (command == "triangle") {
-
 
                     //go to next line
                     i++;
 
-
                     cout << "found a triangle " << endl;
+
                     //input three points
                     struct Point firstPoint, secondPoint, thirdPoint;
-
 
                     firstPoint.x = stof(tokens[i][itr].c_str());
                     firstPoint.y = stof(tokens[i][itr + 1].c_str());
                     firstPoint.z = stof(tokens[i][itr + 2].c_str());
-
 
                     i++;
                     secondPoint.x = stof(tokens[i][itr].c_str());
@@ -433,12 +454,12 @@ void readFromFile() {
                     }
 
 
-                    cout << "\n\t\tABOUT TO MULTIPLY THE FOLLOWING\n\n";
+                    /*cout << "\n\t\tABOUT TO MULTIPLY THE FOLLOWING\n\n";
 
                     print(s.top());
                     cout << endl;
                     print(myMatrix);
-                    cout << "\n\n";
+                    cout << "\n\n";*/
 
 
                     float (*resultant)[10];
@@ -453,17 +474,15 @@ void readFromFile() {
                     //showstack(s);
 
                 } else if (command == "scale") {
-                    //                input scaling factors
-                    //                generate the corresponding scaling matrix T
-                    //                S.push(product(S.top,T))
+                    // input scaling factors
+                    // generate the corresponding scaling matrix T
+                    // S.push(product(S.top,T))
 
                     //go to next line
                     i++;
 
-
                     cout << "do scaling " << endl;
                     struct Point scaleFactor;
-
 
                     //parsing values
                     scaleFactor.x = stof(tokens[i][itr].c_str());
@@ -473,7 +492,7 @@ void readFromFile() {
 
                     float (*scaleMatrix)[10] = new float[10][10];
                     scaleMatrix = makeScalingMatrix(scaleFactor.x, scaleFactor.y, scaleFactor.z);
-                    //printMatrix(scaleMatrix);
+                    //print(scaleMatrix);
 
 
                     float (*prev)[10];
@@ -482,31 +501,19 @@ void readFromFile() {
                     New = matrixMultiplication(prev, scaleMatrix, sz, sz, sz, sz);
                     s.push(New);
 
-
-                    float (*resultant)[10];
-
-                    //resultant = matrixMultiplication(s.top(), scaleMatrix, sz, sz, sz, sz);
-
-                    //printMatrix(resultant); //T*I
-
-                    //insertToStack(resultant);
                     //showstack(s);
 
                 } else if (command == "translate") {
 
-                    //                input translation amounts
-                    //                generate the corresponding translation matrix T
-                    //                S.push(product(S.top,T))
-
-
+                    // input translation amounts
+                    // generate the corresponding translation matrix T
+                    // S.push(product(S.top,T))
 
                     //go to next line
                     i++;
 
-
                     cout << "do translate " << endl;
                     struct Point t;
-
 
                     //parsing values
                     t.x = stof(tokens[i][itr].c_str());
@@ -524,29 +531,17 @@ void readFromFile() {
                     New = matrixMultiplication(prev, T, sz, sz, sz, sz);
                     s.push(New);
 
-                    //float (*resultant)[10];
-
-                    //resultant = matrixMultiplication(s.top(), T, sz, sz, sz, sz);
-
-                    //printMatrix(resultant); //T*I
-
-                    //insertToStack(resultant);
-                    //showstack(s);
-
-
                 } else if (command == "rotate") {
-                    //            input rotation angle and axis
-                    //            generate the corresponding rotation matrix T
-                    //            S.push(product(S.top,T))
-                    //
+                    // input rotation angle and axis
+                    // generate the corresponding rotation matrix T
+                    // S.push(product(S.top,T))
+
                     //go to next line
                     i++;
-
 
                     cout << "\t\tdo rotate " << endl;
                     struct Vector rotateAxis;
                     float rotateAngle;
-
 
                     //parsing values
                     rotateAngle = stof(tokens[i][itr].c_str());
@@ -560,17 +555,15 @@ void readFromFile() {
 
                     Vector c1, c2, c3;
 
-
                     Vector iHat(1, 0, 0), jHat(0, 1, 0), kHat(0, 0, 1);
 
-
                     c1 = rotateRod(iHat, rotateAxis, rotateAngle);
-                     c2 = rotateRod(jHat, rotateAxis, rotateAngle);
-                     c3 = rotateRod(kHat, rotateAxis, rotateAngle);
+                    c2 = rotateRod(jHat, rotateAxis, rotateAngle);
+                    c3 = rotateRod(kHat, rotateAxis, rotateAngle);
 
-                    cout << "c1 : " << c1.x << " " << c1.y << " " << c1.z << " " << endl;
+                    /*cout << "c1 : " << c1.x << " " << c1.y << " " << c1.z << " " << endl;
                     cout << "c2 : " << c2.x << " " << c2.y << " " << c2.z << " " << endl;
-                    cout << "c3 : " << c3.x << " " << c3.y << " " << c3.z << " " << endl;
+                    cout << "c3 : " << c3.x << " " << c3.y << " " << c3.z << " " << endl;*/
 
                     float R[10][10];
 
@@ -594,7 +587,6 @@ void readFromFile() {
                     temp.push_back(0);
                     temp.push_back(0);
                     temp.push_back(1);
-
 
                     for (int j = 0; j < sz; j++) {
 
@@ -624,7 +616,7 @@ void readFromFile() {
                     if (s.size() == 1) continue;
                     int l = Size.top();
                     Size.pop();
-                    while (s.size() > l) {
+                    while (int(s.size()) > l) {
                         s.pop();
                     }
                 } else if (command == "end") {
@@ -638,13 +630,14 @@ void readFromFile() {
 
 
 void readFromStage1File() {
+
     // open a file in read mode.
-    cout << "~~~~~~~~~~~~~~~~~~~~~~~~ Reading from the stage1.txt file  ~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << "\n\n~~~~~~~~~~~~~~~~~~~~~~~~ Reading from the stage1.txt file  ~~~~~~~~~~~~~~~~~~~~~~~\n\n";
 
     string line;
 
     infile2.open("stage1.txt");
-    cout << "here";
+
     if (!infile2.is_open()) {
         perror("Error open");
         exit(EXIT_FAILURE);
@@ -654,7 +647,6 @@ void readFromStage1File() {
     vector<string> tokens[200]; // Create vector to hold the words
 
     while (getline(infile2, line)) {
-
 
         string buf;                 // Have a buffer string
         stringstream ss(line);       // Insert the string into a stream
@@ -666,36 +658,26 @@ void readFromStage1File() {
 
     }
 
-
-
     //printing the file content as a 2d array
-    for (int j = 0; j < line_num; ++j) {
-
-        for (int i = 0; i < tokens[j].size(); ++i) {
-
-            //cout << j << " : " << i << " " << tokens[j][i] << " \n";
-
-        }
-        // cout << endl;
-    }
+    //printTokens(tokens, line_num);
 
     Vector l(0, 0, 0), r(0, 0, 0), u(0, 0, 0);
-    l = subtract(look, eye); //l = look - eye
-    l = normalize(l); //l.normalize()
-    r = crossProduct(l, up); //r = l X up
-    r = normalize(r); // r.normalize()
-    u = crossProduct(r, l); // u = r X l
+
+    l = subtract(look, eye);    //l = look - eye
+    l = normalize(l);           //l.normalize()
+    r = crossProduct(l, up);    //r = l X up
+    r = normalize(r);           // r.normalize()
+    u = crossProduct(r, l);     // u = r X l
 
 
     //Apply the following translation T to move the eye/camera to origin.
     float (*T)[10] = new float[10][10];
 
-    T = makeIdentityMatrix2(sz);
+    T = makeIdentityMatrix(sz);
     T[0][sz - 1] = -eye.x;
     T[1][sz - 1] = -eye.y;
     T[2][sz - 1] = -eye.z;
     T[3][sz - 1] = 1;
-
 
 
     //Apply the following rotation R such that the l aligns with the -Z axis, r with X axis, and u with Y axis.
@@ -718,8 +700,12 @@ void readFromStage1File() {
     int itr = 0;
     for (int i = 0; i < line_num; i++) {
 
-        if (tokens[i][itr] == "-") { i++; }
-        if (tokens[i][itr] == "end") break;
+        if (i == line_num - 1) {
+            cout << "breaking" << endl;
+            break;
+        };
+        if (tokens[i].size() == 0) { i++; }
+
         //input three points
         struct Point firstPoint, secondPoint, thirdPoint;
 
@@ -770,11 +756,11 @@ void readFromStage1File() {
             }
         }
 
-        cout << "\t\tABOUT TO MULTIPLY THE FOLLOWING\n\n";
+        /*cout << "\t\tABOUT TO MULTIPLY THE FOLLOWING\n\n";
         print(V);
         cout << endl;
         print(myMatrix);
-        cout << "\n\n";
+        cout << "\n\n";*/
 
         float (*resultant)[10];
 
@@ -782,8 +768,7 @@ void readFromStage1File() {
 
         print(resultant);
 
-        printMatrix2(resultant); //T*I
-
+        printMatrix2(resultant);
 
     }
     infile2.close();
@@ -792,12 +777,12 @@ void readFromStage1File() {
 
 void readFromStage2File() {
     // open a file in read mode.
-    cout << "Reading from the stage2.txt file" << endl;
+    cout << "\n\n~~~~~~~~~~~~~~~~~~~~~~~~ Reading from the stage2.txt file  ~~~~~~~~~~~~~~~~~~~~~~~\n\n";
 
     string line;
 
     infile3.open("stage2.txt");
-    cout << "here2\n";
+
     if (!infile3.is_open()) {
         perror("Error open");
         exit(EXIT_FAILURE);
@@ -807,7 +792,6 @@ void readFromStage2File() {
     vector<string> tokens[200]; // Create vector to hold the words
 
     while (getline(infile3, line)) {
-
 
         string buf;                 // Have a buffer string
         stringstream ss(line);       // Insert the string into a stream
@@ -820,24 +804,12 @@ void readFromStage2File() {
     }
 
 
-
     //printing the file content as a 2d array
-    for (int j = 0; j < line_num; ++j) {
+    //printTokens(tokens, line_num);
 
-        for (int i = 0; i < tokens[j].size(); ++i) {
-
-            //cout << j << " : " << i << " " << tokens[j][i] << " \n";
-
-        }
-        // cout << endl;
-    }
-
-
-    float fovX = fovY * aspectRatio; //fovX = fovY * aspectRatio
-    float t = near * Tan(fovY / 2.0); //t = near * tan(fovY/2)
-    float div_r = near * Tan(fovX / 2.0); //r = near * tan(fovX/2)
-
-
+    float fovX = fovY * aspectRatio;        //fovX = fovY * aspectRatio
+    float t = near * Tan(fovY / 2.0);       //t = near * tan(fovY/2)
+    float div_r = near * Tan(fovX / 2.0);   //r = near * tan(fovX/2)
 
 
     float (*P)[10] = new float[10][10];
@@ -857,8 +829,13 @@ void readFromStage2File() {
     int itr = 0;
     for (int i = 0; i < line_num; i++) {
 
-        if (tokens[i][itr] == "-") { i++; }
-        if (tokens[i][itr] == "end") break;
+        if (i == line_num - 1) {
+            cout << "breaking" << endl;
+            break;
+        };
+
+        if (tokens[i].size() == 0) { i++; }
+
         //input three points
         struct Point firstPoint, secondPoint, thirdPoint;
 
@@ -866,7 +843,6 @@ void readFromStage2File() {
         firstPoint.x = stof(tokens[i][itr].c_str());
         firstPoint.y = stof(tokens[i][itr + 1].c_str());
         firstPoint.z = stof(tokens[i][itr + 2].c_str());
-
 
         i++;
         secondPoint.x = stof(tokens[i][itr].c_str());
@@ -909,13 +885,13 @@ void readFromStage2File() {
             }
         }
 
-        cout << "\t\tABOUT TO MULTIPLY THE FOLLOWING\n\n";
+        /*cout << "\t\tABOUT TO MULTIPLY THE FOLLOWING\n\n";
         cout << "printing Perspective matrix " << endl;
         print(P);
         cout << endl;
         cout << "stage 2 matrix" << endl;
         print(myMatrix);
-        cout << "\n\n";
+        cout << "\n\n";*/
 
         float (*resultant)[10];
 
@@ -925,35 +901,10 @@ void readFromStage2File() {
 
         printMatrix3(resultant); //T*I
 
-
     }
 
 }
 
-
-int main() {
-
-    float identity[10][10];
-    float (*identityMatrix)[10] = makeIdentityMatrix(identity, sz);
-    insertToStack(identityMatrix);
-
-    outfile.open("stage1.txt");
-    readFromFile();
-    outfile << "end" << endl;
-    outfile.close();
-
-    outfile2.open("stage2.txt");
-    readFromStage1File();
-    outfile2 << "end" << endl;
-    outfile2.close();
-
-    outfile3.open("stage3.txt");
-    readFromStage2File();
-    outfile3 << "end" << endl;
-    outfile3.close();
-
-    return 0;
-}
 
 float
 (*matrixMultiplication(float firstMatrix[][10], float secondMatrix[][10], int rowFirst,
@@ -988,8 +939,9 @@ float
 }
 
 
-float (*makeIdentityMatrix(float identity[][10], int identity_sz))[10] {
+float (*makeIdentityMatrix(int identity_sz))[10] {
 
+    float (*identity)[10] = new float[10][10];
     int row, col;
 
     for (row = 0; row < identity_sz; row++) {
@@ -998,17 +950,12 @@ float (*makeIdentityMatrix(float identity[][10], int identity_sz))[10] {
             // Checking if row is equal to column
             if (row == col) {
                 identity[row][col] = 1;
-
             } else {
                 identity[row][col] = 0;
-
             }
-
         }
-
     }
     return identity;
-
 }
 
 
@@ -1036,7 +983,6 @@ void insertToStack(float (*arr)[10]) {
     s.push(arr);
 
     cout << "s.size() : " << s.size() << "\n\n";
-
 
 }
 
